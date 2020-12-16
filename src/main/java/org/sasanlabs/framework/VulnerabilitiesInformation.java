@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Servlet implementation class {@code VulnerabilitiesInformation}
@@ -35,7 +38,9 @@ public class VulnerabilitiesInformation extends HttpServlet {
 		}
 */		
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("");
+		ObjectMapper objectMapper = new ObjectMapper();
+		response.getWriter().append(objectMapper.writeValueAsString(VulnerabilityInformationRegistry.getAllEndPointResponseBeans()));
+		response.setContentType("application/json");
 	}
 	
 	
