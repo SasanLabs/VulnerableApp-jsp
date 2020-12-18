@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.sasanlabs.framework.Constants.DEFAULT_LOAD_ON_STARTUP_VALUE;
 
 /**
  * Servlet implementation class {@code VulnerabilitiesInformation}
  * This class provides the details about all the endpoints exposed from the Application.
  */
-@WebServlet("/allEndPointJson")
+@WebServlet(value = "/allEndPointJson", loadOnStartup = DEFAULT_LOAD_ON_STARTUP_VALUE)
 public class VulnerabilitiesInformation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
