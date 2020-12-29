@@ -24,7 +24,7 @@ import org.sasanlabs.framework.VulnerabilityInformationRegistry;
  * 
  * @author KSASAN preetkaran20@gmail.com
  */
-@WebServlet(value = "/UnrestrictedFileUpload", loadOnStartup = DEFAULT_LOAD_ON_STARTUP_VALUE)
+@WebServlet(value = "/UnrestrictedFileUpload/*", loadOnStartup = DEFAULT_LOAD_ON_STARTUP_VALUE)
 public class UnrestrictedFileUpload extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
