@@ -1,6 +1,6 @@
 package org.sasanlabs.framework;
 
-import static org.sasanlabs.framework.Constants.DEFAULT_LOAD_ON_STARTUP_VALUE;
+import static org.sasanlabs.framework.VulnerableAppUtility.DEFAULT_LOAD_ON_STARTUP_VALUE;
 
 import java.io.IOException;
 
@@ -40,7 +40,7 @@ public class VulnerabilitiesInformation extends HttpServlet {
 */		
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
-		response.getWriter().append(objectMapper.writeValueAsString(VulnerabilityInformationRegistry.getAllEndPointResponseBeans()));
+		response.getWriter().append(objectMapper.writeValueAsString(VulnerabilityInformationRegistry.getAllRegisteredVulnerabilityDefinitionResponseBeans()));
 		response.setContentType("application/json");
 	}
 	
