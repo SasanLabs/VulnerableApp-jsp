@@ -1,0 +1,41 @@
+//Community Plugins
+plugins {
+    id("com.diffplug.spotless") version "5.6.1"
+    id("com.google.cloud.tools.jib") version "2.6.0"
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'war' 
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+spotless {
+    java {
+        // Don't enforce the license, just the format.
+        clearSteps()
+        googleJavaFormat().aosp()
+    }
+    format 'javascript', {
+    	target 'src/main/resources/**/*.js'
+    	prettier().config(['filepath': 'file.js'])
+  	}
+}
+
+
+dependencies {
+  	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.2.3'       
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.12.0'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'
+	compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+	
+
+}
