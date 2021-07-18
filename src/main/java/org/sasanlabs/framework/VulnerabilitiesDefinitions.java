@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * about all the endpoints exposed from the Application.
  */
 @WebServlet(value = "/VulnerabilityDefinitions", loadOnStartup = DEFAULT_LOAD_ON_STARTUP_VALUE)
-public class VulnerabilitiesInformation extends HttpServlet {
+public class VulnerabilitiesDefinitions extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

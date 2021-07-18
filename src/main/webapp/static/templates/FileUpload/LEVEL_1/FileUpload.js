@@ -5,7 +5,7 @@ function addingEventListenerToUploadImage() {
     var formData = new FormData();
     formData.append("file", file);
     let url =
-      "VulnerableApp-jsp/UnrestrictedFileUpload/" +
+      "VulnerableApp-jsp/FileUpload/" +
       getCurrentVulnerabilityLevel();
     doPostAjaxCall(uploadImage, url, true, formData);
   });

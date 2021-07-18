@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.sasanlabs.framework.VulnerabilityDefinitionRegistry;
 import org.sasanlabs.framework.VulnerableAppException;
 import org.sasanlabs.framework.VulnerableAppUtility;
+import org.sasanlabs.framework.i18n.Messages;
 import org.sasanlabs.vulnerabilities.fileupload.service.AbstractFileUpload;
 import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel1;
 import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel2;
@@ -32,12 +33,12 @@ import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityDefinition;
 import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelDefinition;
 
 /**
- * {@code UnrestrictedFileUpload} represents the fileupload vulnerability.
+ * {@code FileUpload} represents the fileupload vulnerability.
  *
  * @author KSASAN preetkaran20@gmail.com
  */
-@WebServlet(value = "/UnrestrictedFileUpload/*", loadOnStartup = DEFAULT_LOAD_ON_STARTUP_VALUE)
-public class UnrestrictedFileUpload extends HttpServlet {
+@WebServlet(value = "/FileUpload/*", loadOnStartup = DEFAULT_LOAD_ON_STARTUP_VALUE)
+public class FileUpload extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private Map<String, AbstractFileUpload> levelVsFileUploadMap = new HashMap<>();
@@ -63,7 +64,8 @@ public class UnrestrictedFileUpload extends HttpServlet {
         vulnerabilityDefinition.setId("FileUpload");
         vulnerabilityDefinition.setName(vulnerabilityDefinition.getId());
         vulnerabilityDefinition.setLevelDescriptionSet(vulnerabilityLevelDefinitions);
-        vulnerabilityDefinition.setDescription("");
+        vulnerabilityDefinition.setDescription(
+                Messages.getMessage("FileUpload_Vulnerability_Definition"));
         VulnerabilityDefinitionRegistry.add(vulnerabilityDefinition);
     }
 
