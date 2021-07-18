@@ -20,7 +20,6 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.sasanlabs.framework.VulnerabilityDefinitionRegistry;
-import org.sasanlabs.framework.VulnerabilityDefinitionResponseBean;
 import org.sasanlabs.framework.VulnerableAppException;
 import org.sasanlabs.framework.VulnerableAppUtility;
 import org.sasanlabs.vulnerabilities.fileupload.service.AbstractFileUpload;
@@ -29,6 +28,8 @@ import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel2;
 import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel3;
 import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel4;
 import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel5;
+import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityDefinition;
+import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelDefinition;
 
 /**
  * {@code UnrestrictedFileUpload} represents the fileupload vulnerability.
@@ -49,20 +50,20 @@ public class UnrestrictedFileUpload extends HttpServlet {
                             new FileUploadLevel4(),
                             new FileUploadLevel5()));
 
-    private VulnerabilityDefinitionResponseBean vulnerabilityDefinitionResponseBean;
+    private VulnerabilityDefinition vulnerabilityDefinition;
 
     public void init() throws ServletException {
-        Set<VulnerabilityDefinitionResponseBean.LevelResponseBean> levelResponseBeans =
-                new HashSet<>();
+        Set<VulnerabilityLevelDefinition> vulnerabilityLevelDefinitions = new HashSet<>();
         for (AbstractFileUpload fileUpload : FILE_UPLOADS) {
-            levelResponseBeans.add(fileUpload.getVulnerabilityLevelDefinition());
+            vulnerabilityLevelDefinitions.add(fileUpload.getVulnerabilityLevelDefinition());
             levelVsFileUploadMap.put(
                     fileUpload.getVulnerabilityLevelDefinition().getLevel(), fileUpload);
         }
-        vulnerabilityDefinitionResponseBean =
-                new VulnerabilityDefinitionResponseBean(
-                        "UnrestrictedFileUpload", "", levelResponseBeans);
-        VulnerabilityDefinitionRegistry.add(vulnerabilityDefinitionResponseBean);
+        vulnerabilityDefinition = new VulnerabilityDefinition();
+        vulnerabilityDefinition.setId("FileUpload");
+        vulnerabilityDefinition.setLevelDescriptionSet(vulnerabilityLevelDefinitions);
+        vulnerabilityDefinition.setDescription("");
+        VulnerabilityDefinitionRegistry.add(vulnerabilityDefinition);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -105,6 +106,6 @@ public class UnrestrictedFileUpload extends HttpServlet {
     }
 
     public void destroy() {
-        VulnerabilityDefinitionRegistry.remove(vulnerabilityDefinitionResponseBean);
+        VulnerabilityDefinitionRegistry.remove(vulnerabilityDefinition);
     }
 }
