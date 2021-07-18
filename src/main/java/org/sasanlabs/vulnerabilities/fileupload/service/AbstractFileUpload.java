@@ -1,11 +1,17 @@
 package org.sasanlabs.vulnerabilities.fileupload.service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.fileupload.FileItem;
 import org.sasanlabs.framework.VulnerableAppException;
 import org.sasanlabs.framework.VulnerableAppUtility;
 import org.sasanlabs.vulnerabilities.fileupload.UploadedFileDetails;
+import org.sasanlabs.vulnerableapp.facade.schema.ResourceInformation;
+import org.sasanlabs.vulnerableapp.facade.schema.ResourceURI;
+import org.sasanlabs.vulnerableapp.facade.schema.Variant;
 import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelDefinition;
+import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelHint;
 
 /**
  * {@link AbstractFileUpload} represents various FileUpload utilities for uploading files.
@@ -19,6 +25,29 @@ public abstract class AbstractFileUpload {
 
     private static final String WEB_APPS = "webapps";
     private static final String STATIC_FILES_FOLDER = "static";
+
+    static VulnerabilityLevelDefinition getFileUploadVulnerabilityLevelDefinition(
+            String level, String description, Variant variant, List<VulnerabilityLevelHint> hints) {
+        VulnerabilityLevelDefinition vulnerabilityLevelDefinition =
+                new VulnerabilityLevelDefinition();
+        vulnerabilityLevelDefinition.setLevel(level);
+        vulnerabilityLevelDefinition.setDescription(description);
+        vulnerabilityLevelDefinition.setVariant(variant);
+        ResourceInformation resourceInformation = new ResourceInformation();
+        resourceInformation.setHtmlResource(
+                new ResourceURI(false, "templates/FileUpload/LEVEL_1/FileUpload.html"));
+
+        List<ResourceURI> staticResources = new ArrayList<ResourceURI>();
+        staticResources.add(new ResourceURI(false, "templates/FileUpload/LEVEL_1/FileUpload.js"));
+        staticResources.add(new ResourceURI(false, "templates/FileUpload/LEVEL_1/FileUpload.css"));
+        resourceInformation.setStaticResources(staticResources);
+        vulnerabilityLevelDefinition.setResourceInformation(resourceInformation);
+
+        if (hints != null) {
+            vulnerabilityLevelDefinition.setHints(hints);
+        }
+        return vulnerabilityLevelDefinition;
+    }
 
     private File getFileUploadDirectory(String levelDirectory) {
         String tomcatBaseDirectory = System.getProperty("catalina.base");
@@ -81,6 +110,5 @@ public abstract class AbstractFileUpload {
      *
      * @return {@code VulnerabilityDefinitionResponseBean.LevelResponseBean}
      */
-    public abstract VulnerabilityLevelDefinition
-            getVulnerabilityLevelDefinition();
+    public abstract VulnerabilityLevelDefinition getVulnerabilityLevelDefinition();
 }
