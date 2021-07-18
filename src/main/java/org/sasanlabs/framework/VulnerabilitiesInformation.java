@@ -1,6 +1,6 @@
 package org.sasanlabs.framework;
 
-import static org.sasanlabs.framework.VulnerableAppUtility.DEFAULT_LOAD_ON_STARTUP_VALUE;
+import static org.sasanlabs.framework.VulnerableAppConstants.DEFAULT_LOAD_ON_STARTUP_VALUE;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;

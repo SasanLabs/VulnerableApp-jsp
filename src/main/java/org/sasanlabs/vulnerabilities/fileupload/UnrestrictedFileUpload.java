@@ -1,6 +1,6 @@
 package org.sasanlabs.vulnerabilities.fileupload;
 
-import static org.sasanlabs.framework.VulnerableAppUtility.DEFAULT_LOAD_ON_STARTUP_VALUE;
+import static org.sasanlabs.framework.VulnerableAppConstants.DEFAULT_LOAD_ON_STARTUP_VALUE;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,6 +61,7 @@ public class UnrestrictedFileUpload extends HttpServlet {
         }
         vulnerabilityDefinition = new VulnerabilityDefinition();
         vulnerabilityDefinition.setId("FileUpload");
+        vulnerabilityDefinition.setName(vulnerabilityDefinition.getId());
         vulnerabilityDefinition.setLevelDescriptionSet(vulnerabilityLevelDefinitions);
         vulnerabilityDefinition.setDescription("");
         VulnerabilityDefinitionRegistry.add(vulnerabilityDefinition);
@@ -90,7 +91,7 @@ public class UnrestrictedFileUpload extends HttpServlet {
                         if (!item.isFormField()) {
                             UploadedFileDetails uploadedFileDetails =
                                     levelVsFileUploadMap.get(level).validateAndUpload(item);
-                            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                            response.setStatus(HttpServletResponse.SC_OK);
                             response.getWriter()
                                     .append(VulnerableAppUtility.serialize(uploadedFileDetails));
                         }

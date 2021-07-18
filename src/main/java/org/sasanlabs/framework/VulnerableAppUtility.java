@@ -2,8 +2,6 @@ package org.sasanlabs.framework;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,10 +11,6 @@ import java.util.Set;
  * @author KSASAN preetkaran20@gmail.com
  */
 public interface VulnerableAppUtility {
-    int DEFAULT_LOAD_ON_STARTUP_VALUE = 10;
-    String SERVLET_CONTEXT = "VulnerableApp-jsp";
-
-    static final List<String> JSP_EXTENSIONS = Arrays.asList("jsp", "jspx");
 
     static String extractVulnerabilityLevel(String pathInfo, Set<String> allowedLevels)
             throws VulnerableAppException {

@@ -4,10 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.fileupload.FileItem;
+import org.sasanlabs.framework.VulnerableAppConstants;
 import org.sasanlabs.framework.VulnerableAppException;
-import org.sasanlabs.framework.VulnerableAppUtility;
 import org.sasanlabs.vulnerabilities.fileupload.UploadedFileDetails;
 import org.sasanlabs.vulnerableapp.facade.schema.ResourceInformation;
+import org.sasanlabs.vulnerableapp.facade.schema.ResourceType;
 import org.sasanlabs.vulnerableapp.facade.schema.ResourceURI;
 import org.sasanlabs.vulnerableapp.facade.schema.Variant;
 import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelDefinition;
@@ -35,11 +36,24 @@ public abstract class AbstractFileUpload {
         vulnerabilityLevelDefinition.setVariant(variant);
         ResourceInformation resourceInformation = new ResourceInformation();
         resourceInformation.setHtmlResource(
-                new ResourceURI(false, "templates/FileUpload/LEVEL_1/FileUpload.html"));
+                new ResourceURI(
+                        false,
+                        VulnerableAppConstants.SERVLET_CONTEXT
+                                + "/static/templates/FileUpload/LEVEL_1/FileUpload.html"));
 
         List<ResourceURI> staticResources = new ArrayList<ResourceURI>();
-        staticResources.add(new ResourceURI(false, "templates/FileUpload/LEVEL_1/FileUpload.js"));
-        staticResources.add(new ResourceURI(false, "templates/FileUpload/LEVEL_1/FileUpload.css"));
+        staticResources.add(
+                new ResourceURI(
+                        false,
+                        VulnerableAppConstants.SERVLET_CONTEXT
+                                + "/static/templates/FileUpload/LEVEL_1/FileUpload.js",
+                        ResourceType.JAVASCRIPT.name()));
+        staticResources.add(
+                new ResourceURI(
+                        false,
+                        VulnerableAppConstants.SERVLET_CONTEXT
+                                + "/static/templates/FileUpload/LEVEL_1/FileUpload.css",
+                        ResourceType.CSS.name()));
         resourceInformation.setStaticResources(staticResources);
         vulnerabilityLevelDefinition.setResourceInformation(resourceInformation);
 
@@ -57,7 +71,7 @@ public abstract class AbstractFileUpload {
                                 + File.separator
                                 + WEB_APPS
                                 + File.separator
-                                + VulnerableAppUtility.SERVLET_CONTEXT
+                                + VulnerableAppConstants.SERVLET_CONTEXT
                                 + File.separator
                                 + STATIC_FILES_FOLDER
                                 + File.separator
@@ -79,11 +93,14 @@ public abstract class AbstractFileUpload {
                         + File.separator
                         + fileName;
         File storeFile = new File(filePath);
+        if (storeFile.exists()) {
+            storeFile.delete();
+        }
         try {
             fileItem.write(storeFile);
             UploadedFileDetails uploadedFileDetails =
                     new UploadedFileDetails(
-                            VulnerableAppUtility.SERVLET_CONTEXT
+                            VulnerableAppConstants.SERVLET_CONTEXT
                                     + File.separator
                                     + "static"
                                     + File.separator

@@ -1,6 +1,6 @@
 package org.sasanlabs.vulnerabilities.fileupload.service;
 
-import static org.sasanlabs.framework.VulnerableAppUtility.JSP_EXTENSIONS;
+import static org.sasanlabs.framework.VulnerableAppConstants.JSP_EXTENSIONS;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

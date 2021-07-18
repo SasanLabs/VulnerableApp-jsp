@@ -4,14 +4,14 @@ function addingEventListenerToUploadImage() {
     var file = form.files[0];
     var formData = new FormData();
     formData.append("file", file);
-    let url = "VulnerableApp-jsp/UnrestrictedFileUpload/" + getCurrentVulnerabilityLevel();
+    let url =
+      "VulnerableApp-jsp/UnrestrictedFileUpload/" +
+      getCurrentVulnerabilityLevel();
     doPostAjaxCall(uploadImage, url, true, formData);
   });
 }
 addingEventListenerToUploadImage();
 
 function uploadImage(data) {
-  document.getElementById("uploaded_file_info").innerHTML = data.isValid
-    ? "File uploaded at location:" + data.content
-    : data.content;
+  document.getElementById("uploaded_file_info").innerHTML = "File uploaded at location:" + data.fileNameWithPath;
 }
