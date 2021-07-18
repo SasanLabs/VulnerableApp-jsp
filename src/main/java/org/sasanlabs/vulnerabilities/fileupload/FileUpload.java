@@ -65,7 +65,7 @@ public class FileUpload extends HttpServlet {
         vulnerabilityDefinition.setName(vulnerabilityDefinition.getId());
         vulnerabilityDefinition.setLevelDescriptionSet(vulnerabilityLevelDefinitions);
         vulnerabilityDefinition.setDescription(
-                Messages.getMessage("FileUpload_Vulnerability_Definition"));
+                Messages.getMessage("FILE_UPLOAD_VULNERABILITY_DEFINITION"));
         VulnerabilityDefinitionRegistry.add(vulnerabilityDefinition);
     }
 
