@@ -29,6 +29,8 @@ import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel2;
 import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel3;
 import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel4;
 import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel5;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel6;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevelSecure;
 import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityDefinition;
 import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelDefinition;
 
@@ -49,7 +51,9 @@ public class FileUpload extends HttpServlet {
                             new FileUploadLevel2(),
                             new FileUploadLevel3(),
                             new FileUploadLevel4(),
-                            new FileUploadLevel5()));
+                            new FileUploadLevel5(),
+                            new FileUploadLevel6(),
+                            new FileUploadLevelSecure()));
 
     private VulnerabilityDefinition vulnerabilityDefinition;
 

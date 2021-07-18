@@ -10,7 +10,7 @@ import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelDefinition;
 
 public class FileUploadLevelSecure extends AbstractFileUpload {
 
-    private static final String LEVEL = "LEVEL_6";
+    private static final String LEVEL = "LEVEL_7";
     private static final List<String> ALLOWED_EXTENSIONS = Arrays.asList("png", "jpeg");
 
     @Override
