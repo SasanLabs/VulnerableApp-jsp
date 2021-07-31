@@ -17,7 +17,10 @@ There are 2 ways to build and run this project:
 5. Start Apache Tomcat Server
 ```
 2. For building the docker image and then using [VulnerableApp-Facade](https://github.com/SasanLabs/VulnerableApp-facade#simple-start) to test the working of the application.
-
+```
+1. Build the docker image with command: docker build . -t sasanlabs/owasp-vulnerableapp-jsp
+2. Navigate to VulnerableApp-Facade and run it as described in VulnerableApp-Facade#simple-start
+```
 ### Api structure for testing:
 General URL pattern we follow for api's is:
 `http://<baseurl>:<port>/VulnerableApp-jsp/<Vulnerability type>/<Vulnerability level>`
