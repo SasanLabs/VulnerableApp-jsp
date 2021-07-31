@@ -7,10 +7,23 @@ User Interface for VulnerableApp-jsp is provided by [Owasp VulnerableApp-Facade]
 As VulnerableApp-jsp doesn't provide user interface and relies on [Owasp VulnerableApp-facade](https://github.com/SasanLabs/VulnerableApp-facade) hence you need to start it using instructions: [VulnerableApp-Facade simple start](https://github.com/SasanLabs/VulnerableApp-facade#simple-start)
 
 ## How to contribute to the project
-There are 2 ways in which you can run this project:
-1. Building it from source code, then using Api's to test the working of application.
-2. Building the docker image and then using [VulnerableApp-Facade](https://github.com/SasanLabs/VulnerableApp-facade#simple-start) to test the working of the application.
+There are 2 ways to build and run this project:
+1. For building the project from source code:
+```
+1. Install [Apache Tomcat Server](https://tomcat.apache.org/download-90.cgi)
+2. Execute following command for project root: `./gradlew war` 
+3. Navigate to `build/libs/`
+4. Move the *.war file to `tomcat/webapps/` directory
+5. Start Apache Tomcat Server
+```
+2. For building the docker image and then using [VulnerableApp-Facade](https://github.com/SasanLabs/VulnerableApp-facade#simple-start) to test the working of the application.
 
-## Contact ##
+### Api structure for testing:
+General URL pattern we follow for api's is:
+`http://<baseurl>:<port>/VulnerableApp-jsp/<Vulnerability type>/<Vulnerability level>`
+#### Example URL:
+`http://<baseurl>:<port>/VulnerableApp-jsp/FileUpload/LEVEL_1`
+  
+## Contact
 Please raise a github issue for enhancement/issues in VulnerableApp-jsp or send email to karan.sasan@owasp.org regarding queries
 we will try to resolve issues asap.
