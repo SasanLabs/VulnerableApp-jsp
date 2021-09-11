@@ -1,4 +1,5 @@
 # ![VulnerableApp-jsp](https://raw.githubusercontent.com/SasanLabs/VulnerableApp/master/docs/logos/Coloured/iconColoured.png) VulnerableApp-jsp
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![](https://img.shields.io/twitter/follow/sasan_karan?style=flat&logo=twitter)](https://twitter.com/intent/follow?screen_name=sasan_karan)
 
 VulnerableApp-jsp is a Vulnerable Application containing vulnerabilities specific to JSP technology stack. It is part of the farm of Vulnerable Applications provided by [SasanLabs](https://github.com/SasanLabs). This Vulnerable Application utilises the facilities provided by [Owasp VulnerableApp-Facade](https://github.com/SasanLabs/VulnerableApp-facade) and it is just exposing bunch of Api's which are vulnerable to various attacks.
 User Interface for VulnerableApp-jsp is provided by [Owasp VulnerableApp-Facade](https://github.com/SasanLabs/VulnerableApp-facade).
