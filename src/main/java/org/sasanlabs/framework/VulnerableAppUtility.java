@@ -1,10 +1,10 @@
 package org.sasanlabs.framework;
 
-import static java.lang.String.format;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,10 +40,7 @@ public interface VulnerableAppUtility {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            LOG.error(
-                    format(
-                            "An exception occurred %s. Caused by %s%n%s",
-                            e.getMessage(), e.getCause(), e));
+            LOG.error("An exception occurred %s. Caused by %s%n%s", e);
             return "";
         }
     }
