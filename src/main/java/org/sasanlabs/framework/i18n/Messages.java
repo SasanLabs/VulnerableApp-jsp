@@ -16,7 +16,7 @@ public class Messages {
     public static String getMessage(String key) {
         if (key != null && message != null && message.containsKey(key)) {
             final String translation = message.getString(key);
-            LOG.trace(() -> String.format("%s translated as %s", key, translation));
+            LOG.trace("{} translated as {}", key, translation);
             return translation;
         }
         return "";
