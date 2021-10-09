@@ -1,14 +1,11 @@
 package org.sasanlabs.framework.i18n;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-/**
- * @author KSASAN preetkaran20@gmail.com
- */
+/** @author KSASAN preetkaran20@gmail.com */
 public class Messages {
     private static final Logger LOG = LogManager.getLogger(Messages.class);
 

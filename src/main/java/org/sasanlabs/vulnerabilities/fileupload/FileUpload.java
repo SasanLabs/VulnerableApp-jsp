@@ -1,5 +1,15 @@
 package org.sasanlabs.vulnerabilities.fileupload;
 
+import static org.sasanlabs.framework.VulnerableAppConstants.DEFAULT_LOAD_ON_STARTUP_VALUE;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -10,21 +20,16 @@ import org.sasanlabs.framework.VulnerabilityDefinitionRegistry;
 import org.sasanlabs.framework.VulnerableAppException;
 import org.sasanlabs.framework.VulnerableAppUtility;
 import org.sasanlabs.framework.i18n.Messages;
-import org.sasanlabs.vulnerabilities.fileupload.service.*;
+import org.sasanlabs.vulnerabilities.fileupload.service.AbstractFileUpload;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel1;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel2;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel3;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel4;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel5;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevel6;
+import org.sasanlabs.vulnerabilities.fileupload.service.FileUploadLevelSecure;
 import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityDefinition;
 import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelDefinition;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-
-import static java.lang.String.format;
-import static org.sasanlabs.framework.VulnerableAppConstants.DEFAULT_LOAD_ON_STARTUP_VALUE;
 
 /**
  * {@code FileUpload} represents the fileupload vulnerability.
@@ -65,18 +70,18 @@ public class FileUpload extends HttpServlet {
                 Messages.getMessage("FILE_UPLOAD_VULNERABILITY_DEFINITION"));
         VulnerabilityDefinitionRegistry.add(vulnerabilityDefinition);
 
-        LOG.debug(() -> getClass().getSimpleName() + " is initialized");
+        LOG.debug(() -> "Servlet initialized");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LOG.debug(() -> format("GET %s", request.getPathInfo()));
+        LOG.debug("GET {}", request.getPathInfo());
         response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LOG.debug(() -> format("POST %s", request.getPathInfo()));
+        LOG.debug("POST {}", request.getPathInfo());
         try {
             String level =
                     VulnerableAppUtility.extractVulnerabilityLevel(
@@ -102,8 +107,7 @@ public class FileUpload extends HttpServlet {
                 }
             }
         } catch (VulnerableAppException | FileUploadException e) {
-            LOG.error(format("An exception occurred %s. Caused by %s%n%s", e.getMessage(), e.getCause(), e));
-
+            LOG.error("An exception occurred", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().append("Failed to upload file, " + e.getMessage());
         }
