@@ -70,7 +70,7 @@ public class FileUpload extends HttpServlet {
                 Messages.getMessage("FILE_UPLOAD_VULNERABILITY_DEFINITION"));
         VulnerabilityDefinitionRegistry.add(vulnerabilityDefinition);
 
-        LOG.debug(() -> "Servlet initialized");
+        LOG.debug("Servlet initialized");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
