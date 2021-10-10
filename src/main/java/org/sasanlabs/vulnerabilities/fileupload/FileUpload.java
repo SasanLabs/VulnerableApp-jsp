@@ -4,12 +4,7 @@ import static org.sasanlabs.framework.VulnerableAppConstants.DEFAULT_LOAD_ON_STA
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +14,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.sasanlabs.framework.VulnerabilityDefinitionRegistry;
 import org.sasanlabs.framework.VulnerableAppException;
 import org.sasanlabs.framework.VulnerableAppUtility;
@@ -41,6 +38,7 @@ import org.sasanlabs.vulnerableapp.facade.schema.VulnerabilityLevelDefinition;
  */
 @WebServlet(value = "/FileUpload/*", loadOnStartup = DEFAULT_LOAD_ON_STARTUP_VALUE)
 public class FileUpload extends HttpServlet {
+    private static final Logger LOG = LogManager.getLogger(FileUpload.class);
 
     private static final long serialVersionUID = 1L;
     private Map<String, AbstractFileUpload> levelVsFileUploadMap = new HashMap<>();
@@ -71,15 +69,19 @@ public class FileUpload extends HttpServlet {
         vulnerabilityDefinition.setDescription(
                 Messages.getMessage("FILE_UPLOAD_VULNERABILITY_DEFINITION"));
         VulnerabilityDefinitionRegistry.add(vulnerabilityDefinition);
+
+        LOG.debug("Servlet initialized");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        LOG.debug("GET {}", request.getPathInfo());
         response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        LOG.debug("POST {}", request.getPathInfo());
         try {
             String level =
                     VulnerableAppUtility.extractVulnerabilityLevel(
@@ -105,8 +107,7 @@ public class FileUpload extends HttpServlet {
                 }
             }
         } catch (VulnerableAppException | FileUploadException e) {
-            // For now as logger is not integrated
-            e.printStackTrace();
+            LOG.error("An exception occurred", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             response.getWriter().append("Failed to upload file, " + e.getMessage());
         }

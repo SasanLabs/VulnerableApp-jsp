@@ -3,6 +3,8 @@ package org.sasanlabs.framework;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Set;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * {@code VulnerableAppUtility} class holds the general constants and utility methods which are used
@@ -11,6 +13,7 @@ import java.util.Set;
  * @author KSASAN preetkaran20@gmail.com
  */
 public interface VulnerableAppUtility {
+    Logger LOG = LogManager.getLogger(VulnerableAppUtility.class);
 
     static String extractVulnerabilityLevel(String pathInfo, Set<String> allowedLevels)
             throws VulnerableAppException {
@@ -35,7 +38,7 @@ public interface VulnerableAppUtility {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            // Logger is not integrated. will pick this once integrated.
+            LOG.error("An exception occurred %s. Caused by %s%n%s", e);
             return "";
         }
     }
