@@ -42,6 +42,9 @@ jib {
 	    }
 	  }
 	}
+	to {
+	  image = sasanlabs/owasp-vulnerableapp-jsp
+	}
 }
 
 spotless {
