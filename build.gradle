@@ -43,7 +43,7 @@ jib {
 	  }
 	}
 	to {
-	  image = sasanlabs/owasp-vulnerableapp-jsp
+	  image = 'sasanlabs/owasp-vulnerableapp-jsp'
 	}
 }
 
