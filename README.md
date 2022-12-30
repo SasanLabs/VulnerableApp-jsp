@@ -19,7 +19,7 @@ There are 2 ways to build and run this project:
 ```
 2. For building the docker image and then using [VulnerableApp-Facade](https://github.com/SasanLabs/VulnerableApp-facade#simple-start) to test the working of the application.
 ```
-1. Build the docker image with command: docker build . -t sasanlabs/owasp-vulnerableapp-jsp
+1. Build the docker image with command: docker buildx build --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x -t  sasanlabs/owasp-vulnerableapp-jsp:latest . --push
 2. Navigate to VulnerableApp-Facade and run it as described in VulnerableApp-Facade#simple-start
 ```
 ### Api structure for testing:
