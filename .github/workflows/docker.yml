@@ -28,4 +28,4 @@ jobs:
         name: Build with Gradle and Push
         run: |
           ./gradlew jib \
-          -Djib.to.image=sasanlabs/owasp-vulnerableapp:latest \
+          -Djib.to.image=sasanlabs/owasp-vulnerableapp-jsp:latest \
