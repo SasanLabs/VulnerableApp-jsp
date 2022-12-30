@@ -1,7 +1,6 @@
 //Community Plugins
 plugins {
     id("com.diffplug.spotless") version "5.6.1"
-    id("com.google.cloud.tools.jib") version "3.3.0"
 }
 
 apply plugin: 'java'
@@ -16,38 +15,6 @@ repositories {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-jib {
-	from { 
-	  image = 'tomcat:8.5-jre8-alpine'
-	  platforms {
-	    platform {
-	      architecture = 'amd64'
-	      os = 'linux'
-	    }
-	    platform {
-	      architecture = 'arm64'
-	      os = 'linux'
-	    }
-	    platform {
-	      architecture = '386'
-	      os = 'linux'
-	    }
-	    platform {
-	      architecture = 's390x'
-	      os = 'linux'
-	    }
-	    platform {
-	      architecture = 'ppc64le'
-	      os = 'linux'
-	    }
-	  }
-	}
-	to {
-	  image = 'sasanlabs/owasp-vulnerableapp-jsp'
-	}
-	container.appRoot = '/usr/local/tomcat/webapps/ROOT'	  	
-}
 
 spotless {
     java {
