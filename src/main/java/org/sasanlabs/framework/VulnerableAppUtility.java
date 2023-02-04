@@ -55,7 +55,6 @@ public interface VulnerableAppUtility {
         if (index < 0) {
             return null;
         }
-        String extension = fileName.substring(index + 1).toLowerCase();
-        return extension;
+        return fileName.substring(index + 1).toLowerCase();
     }
 }
